@@ -4,10 +4,6 @@ import ru.fizteh.fivt.students.tonmit.storeable.db_structure.TableManager;
 
 import java.io.UnsupportedEncodingException;
 
-/**
- * Each Table stores subdirectories, that have special name "folders" in this project. Each folder stores DataFiles.
- * Coordinate object holds index of folder and index of file in order to have access to each DataFile in the Table.
- */
 public class Coordinates implements Comparable<Coordinates> {
     private final int folderIndex;
     private final int fileIndex;
