@@ -50,14 +50,14 @@ public class DataFile {
                     file.write(currentKey.getBytes(TableManager.CODE_FORMAT));
                     file.write('\0');
                     reserved.add((int) file.getFilePointer());
-                    file.writeInt(0); // Place reserved for offset.
+                    file.writeInt(0);
                 }
-                for (String currentKey : keys) { // Write values.
+                for (String currentKey : keys) {
                     offsets.add((int) file.getFilePointer());
                     file.write(provider.serialize(table, fileMap.get(currentKey)).getBytes(TableManager.CODE_FORMAT));
                 }
                 Iterator<Integer> offsetIterator = offsets.iterator();
-                for (int offsetPos : reserved) { // Write offsets in reserved places.
+                for (int offsetPos : reserved) {
                     file.seek(offsetPos);
                     file.writeInt(offsetIterator.next());
                 }
@@ -96,9 +96,9 @@ public class DataFile {
             } while (counter < offsets.get(0));
 
             offsets.add((int) file.length());
-            offsets.remove(0); // It's current position in file, we don't need it in list.
+            offsets.remove(0);
             Iterator<String> keyIterator = keys.iterator();
-            for (int nextOffset : offsets) { // Read values.
+            for (int nextOffset : offsets) {
                 while (counter < nextOffset) {
                     bytes.write(file.readByte());
                     counter++;
