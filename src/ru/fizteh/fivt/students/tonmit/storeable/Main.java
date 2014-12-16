@@ -40,9 +40,9 @@ public final class Main {
             System.exit(dbInterpreter.run(args));
         } catch (Exception e) {
             if (e.getMessage() != null) {
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
             } else {
-                System.out.println("Unexpected error in function run");
+                System.err.println("Unexpected error in function run");
                 e.printStackTrace();
             }
             System.exit(1);
