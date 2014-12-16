@@ -138,29 +138,7 @@ public class TableManager implements TableProvider {
     }
 
     private String excludeFromStoreable(Table table, Storeable storeable, int index) {
-        Object answer = null;
-        Class<?> currentClass = table.getColumnType(index);
-        if (currentClass == Integer.class) {
-            answer = storeable.getIntAt(index);
-        }
-        if (currentClass == Long.class) {
-            answer = storeable.getLongAt(index);
-        }
-        if (currentClass == Byte.class) {
-            answer = storeable.getByteAt(index);
-        }
-        if (currentClass == Float.class) {
-            answer = storeable.getFloatAt(index);
-        }
-        if (currentClass == Double.class) {
-            answer = storeable.getDoubleAt(index);
-        }
-        if (currentClass == Boolean.class) {
-            answer = storeable.getBooleanAt(index);
-        }
-        if (currentClass == String.class) {
-            answer = storeable.getStringAt(index);
-        }
+        Object answer = storeable.getColumnAt(index);
         if (answer != null) {
             return answer.toString();
         } else {
