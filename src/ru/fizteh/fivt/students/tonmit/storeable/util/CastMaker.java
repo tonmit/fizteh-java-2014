@@ -9,64 +9,22 @@ import java.util.List;
 public final class CastMaker {
 
     public static String classToString(Class<?> classArg) {
-        String answer = null; // Can't compile without it.
-        if (classArg == Integer.class) {
-            answer = "int";
-        }
-        if (classArg == Long.class) {
-            answer = "long";
-        }
-        if (classArg == Byte.class) {
-            answer = "byte";
-        }
-        if (classArg == Float.class) {
-            answer = "float";
-        }
-        if (classArg == Double.class) {
-            answer = "double";
-        }
-        if (classArg == Boolean.class) {
-            answer = "boolean";
-        }
-        if (classArg == String.class) {
-            answer = "String";
-        }
-        if (answer == null) {
+        try {
+            StoreableEnum answer = StoreableEnum.fromBoxedClass(classArg);
+            return answer.getPrintedName();
+        } catch (EnumConstantNotPresentException ex) {
             throw new IllegalArgumentException("Trying to cast unknown type to String");
-        } else {
-            return answer;
         }
     }
 
     public static Class<?> stringToClass(String className) {
-        Class<?> answer;
-        switch (className) {
-            case "int":
-                answer = Integer.class;
-                break;
-            case "long":
-                answer = Long.class;
-                break;
-            case "byte":
-                answer = Byte.class;
-                break;
-            case "float":
-                answer = Float.class;
-                break;
-            case "double":
-                answer = Double.class;
-                break;
-            case "boolean":
-                answer = Boolean.class;
-                break;
-            case "String":
-                answer = String.class;
-                break;
-            default:
-                throw new IllegalArgumentException("wrong type (only primitive data types or String are allowed, \""
-                        + className + "\" is not one of them)");
+        try {
+            StoreableEnum answer = StoreableEnum.withPrintedName(className);
+            return answer.getBoxedClass();
+        } catch (EnumConstantNotPresentException ex) {
+            throw new IllegalArgumentException("wrong type (only primitive data types or String are allowed, \""
+                    + className + "\" is not one of them)");
         }
-        return  answer;
     }
 
     public static String makeJSON(String[] stringsWhichHoldsSignature, int firstSignificantStringIndex) {
