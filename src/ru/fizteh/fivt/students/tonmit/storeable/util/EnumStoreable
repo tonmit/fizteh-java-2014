@@ -1,6 +1,6 @@
 package ru.fizteh.fivt.students.tonmit.storeable.util;
 
-public enum StoreableEnum {
+public enum EnumStoreable {
     INT(Integer.class, "int"),
     DOUBLE(Double.class, "double"),
     BYTE(Byte.class, "byte"),
@@ -12,27 +12,27 @@ public enum StoreableEnum {
     private final Class<?> boxedClass;
     private final String printedName;
 
-    private StoreableEnum(Class<?> type, String name) {
+    private EnumStoreable(Class<?> type, String name) {
         boxedClass = type;
         printedName = name;
     }
 
-    public static StoreableEnum withPrintedName(String name) {
-        for (StoreableEnum type : StoreableEnum.values()) {
+    public static EnumStoreable withPrintedName(String name) {
+        for (EnumStoreable type : EnumStoreable.values()) {
             if (type.getPrintedName().equals(name)) {
                 return type;
             }
         }
-        throw new EnumConstantNotPresentException(StoreableEnum.class, name);
+        throw new EnumConstantNotPresentException(EnumStoreable.class, name);
     }
 
-    public static StoreableEnum fromBoxedClass(Class<?> cls) {
-        for (StoreableEnum type : StoreableEnum.values()) {
+    public static EnumStoreable fromBoxedClass(Class<?> cls) {
+        for (EnumStoreable type : EnumStoreable.values()) {
             if (type.getBoxedClass().equals(cls)) {
                 return type;
             }
         }
-        throw new EnumConstantNotPresentException(StoreableEnum.class, cls.getSimpleName());
+        throw new EnumConstantNotPresentException(EnumStoreable.class, cls.getSimpleName());
     }
 
     @Override
