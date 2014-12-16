@@ -67,7 +67,7 @@ public final class Interpreter {
 
     private void interactiveMode() throws Exception {
         try (Scanner in = new Scanner(this.in)) {
-            while (true) {
+            while (in.hasNextLine()) {
                 out.print(PROMPT);
                 executeLine(in.nextLine().trim(), false);
             }
