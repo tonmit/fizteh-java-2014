@@ -139,7 +139,7 @@ public class TableManagerTest {
                 writer.println(CastMaker.classToString(currentClass));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            fail();
         }
 
         TableProvider test = new TableManager(directoryPath.toString());
