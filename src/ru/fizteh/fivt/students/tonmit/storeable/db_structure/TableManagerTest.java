@@ -188,7 +188,7 @@ public class TableManagerTest {
                 writer.println(CastMaker.classToString(currentClass));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            fail();
         }
 
         TableProvider test = new TableManager(directoryPath.toString());
@@ -277,7 +277,7 @@ public class TableManagerTest {
                 writer.println(CastMaker.classToString(currentClass));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            fail();
         }
 
         TableManager test = new TableManager(directoryPath.toString());
@@ -293,7 +293,7 @@ public class TableManagerTest {
             table = new TableClass(testDir, tableName, provider, listWhichHoldsAllTypes);
             assertEquals(provider.serialize(table, megaStoreable), "[1, 2, 3, 7.62, 3.14, false, string]");
         } catch (DatabaseCorruptedException e) {
-            e.printStackTrace();
+            fail();
         }
     }
 
