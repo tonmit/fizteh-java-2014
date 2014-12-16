@@ -10,7 +10,7 @@ public final class CastMaker {
 
     public static String classToString(Class<?> classArg) {
         try {
-            StoreableEnum answer = StoreableEnum.fromBoxedClass(classArg);
+            EnumStoreable answer = EnumStoreable.fromBoxedClass(classArg);
             return answer.getPrintedName();
         } catch (EnumConstantNotPresentException exc) {
             throw new IllegalArgumentException("Trying to cast unknown type to String");
@@ -19,7 +19,7 @@ public final class CastMaker {
 
     public static Class<?> stringToClass(String className) {
         try {
-            StoreableEnum answer = StoreableEnum.withPrintedName(className);
+            EnumStoreable answer = EnumStoreable.withPrintedName(className);
             return answer.getBoxedClass();
         } catch (EnumConstantNotPresentException exc) {
             throw new IllegalArgumentException("wrong type (only primitive data types or String are allowed, \""
